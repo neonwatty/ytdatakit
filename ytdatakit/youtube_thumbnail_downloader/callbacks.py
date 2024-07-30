@@ -2,9 +2,16 @@ from ytdatakit.youtube_thumbnail_downloader.yt_thumbnail_downloader import get_b
 from ytdatakit.youtube_thumbnail_downloader.zip import zip_images
 import streamlit as st
 from io import StringIO
+import tempfile
 
 
-def fetch_thumbnails(uploaded_file, text_urls, savedir):
+def default_temp_savdir():
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        return tmpdirname
+
+
+def fetch_thumbnails(uploaded_file, text_urls):
+    savedir = default_temp_savdir()
     with st.spinner(text="thumbnail pull in progress..."):
         youtube_urls = []
         if uploaded_file is not None:
