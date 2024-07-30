@@ -1,14 +1,23 @@
+*.mp4a
+*.mp3
+*.mp4
+venv*
 *.db
+*.faiss
 .DS_Store
 ._.DS_Store
 **/.DS_Store
 **/._.DS_Store
 **/.env*
-scratch.ipynb
 bug_reports/
 .ruff_cache/
 .vscode
+notebook_tests/
 scratch_notebooks/
+demos/
+release_notes/
+site/
+tests/test_files/text/test_preprocessed/*
 !.ruff.toml
 push_pypi.sh
 
