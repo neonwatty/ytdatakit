@@ -11,6 +11,8 @@ def default_temp_savdir():
 
 
 def fetch_thumbnails(uploaded_file, text_urls):
+    
+    
     savedir = default_temp_savdir()
     with st.spinner(text="thumbnail pull in progress..."):
         youtube_urls = []
