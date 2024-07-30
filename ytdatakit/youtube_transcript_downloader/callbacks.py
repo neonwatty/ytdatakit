@@ -1,5 +1,7 @@
-import pandas as pd
 from ytdatakit.youtube_transcript_downloader.yt_transcript_download import get_batch_transcripts
+from io import StringIO
+import pandas as pd
+import streamlit as st
 
 
 @st.cache_data
@@ -8,19 +10,36 @@ def convert_df(df: pd.DataFrame) -> "csv":
     return df.to_csv().encode("utf-8")
 
 
-def button_logic(youtube_short_urls: list) -> None:
-    if trans_button_val:
-        batch_transcripts = get_batch_transcripts(youtube_short_urls)
-        df = pd.DataFrame(batch_transcripts)
-        converted_dv = convert_df(df)
-        st.write(df.head(1).to_dict())
+def fetch_transcripts(uploaded_file, text_urls) -> None:
+    youtube_urls = []
+    if uploaded_file is not None:
+        if text_urls is not None:
+            if len(text_urls.strip()) > 0:
+                st.warning("you can enter urls manually or from file but not both", icon="⚠️")
+                st.stop()
 
-        with download_area:
-            st.download_button(
-                label="Download transcripts",
-                data=converted_dv,
-                file_name="output.csv",
-                mime="text/csv",
-                disabled=False,
-                type="primary",
-            )
+        if uploaded_file.type == "text/plain":
+            stringio = StringIO(uploaded_file.read().decode("utf-8"))
+            for line in stringio:
+                youtube_urls.append(line.strip())
+    if text_urls is not None:
+        if len(text_urls.strip()) > 0:
+            if uploaded_file is not None:
+                st.warning("you can enter urls manually or from file but not both", icon="⚠️")
+                st.stop()
+            try:
+                text_urls_split = text_urls.split(",")
+                text_urls_split = [v.strip() for v in text_urls_split]
+                youtube_urls = text_urls_split
+            except:  # noqa E722
+                st.warning("please check your manually entered urls", icon="⚠️")
+                st.stop()
+        with st.spinner(text="transcript pull in progress..."):
+            button_logic(youtube_short_urls)
+    
+    
+    
+    batch_transcripts = get_batch_transcripts(youtube_urls)
+    df = pd.DataFrame(batch_transcripts)
+    st.session_state.transcript_data = convert_df(df)
+
