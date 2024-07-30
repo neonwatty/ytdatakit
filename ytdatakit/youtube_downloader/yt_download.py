@@ -21,6 +21,8 @@ def download_video(url: str, savedir: str, resolution_dropdown: str, my_proxies:
                 video_url = info_dict.get("url", None)
                 video_id = info_dict.get("id", None)
                 video_title = info_dict.get("title", None)
+                video_title = re.sub(r'[^a-zA-Z0-9]', '', video_title)
+
                 if video_title is None:
                     savepath = savedir + "/" + video_id + ".mp4"
                 else:

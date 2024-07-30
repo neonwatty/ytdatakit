@@ -4,7 +4,7 @@ import streamlit as st
 from io import StringIO
 
 
-def fetch_thumbnails(uploaded_file, text_urls):
+def fetch_thumbnails(uploaded_file, text_urls, savedir):
     with st.spinner(text="thumbnail pull in progress..."):
         youtube_urls = []
         if uploaded_file is not None:
@@ -29,7 +29,8 @@ def fetch_thumbnails(uploaded_file, text_urls):
                 except:  # noqa E722
                     st.warning("please check your manually entered urls", icon="⚠️")
                     st.stop()
+        thumbnail_savepaths, thumbnail_data_entries = get_batch_thumbnails(youtube_urls, savedir)
+        # zip_images(thumbnail_savepaths)
+        st.session_state.thumbnail_savepaths = thumbnail_savepaths
+        st.session_state.thumbnail_data_entries = thumbnail_data_entries
 
-        thumbnail_savepaths, data_entries = get_batch_thumbnails(youtube_urls, st.session_data.thumbnail_savepath)
-        zip_images(thumbnail_savepaths, st.session_data.thumbnails_zip_path)
-        return thumbnail_savepaths, data_entries

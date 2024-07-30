@@ -44,7 +44,7 @@ def app():
             placeholder="https://www.youtube.com/shorts/o7a9hx-Pqyo, https://www.youtube.com/shorts/xkAYLnIsfX4, ....",
             key="transcript_urls_input"
         )
-        uploaded_file = st.file_uploader("Choose a File", type=["txt"])
+        uploaded_file = st.file_uploader("Choose a File", type=["txt"], key="transcripts_file_uploader")
         transcript_col_1, transcript_col_2, transcript_col_3 = st.columns([3, 4, 6])
         with transcript_col_1:
             st.markdown('<span id="button-fetch"></span>', unsafe_allow_html=True)

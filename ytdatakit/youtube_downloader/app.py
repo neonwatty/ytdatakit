@@ -6,7 +6,6 @@ import streamlit as st
 
 def app():
     state_init()
-
     st.markdown(
         """
     <style>

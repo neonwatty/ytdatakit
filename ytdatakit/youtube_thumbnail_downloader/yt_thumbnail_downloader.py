@@ -1,7 +1,7 @@
 import re
 import requests
-import yt_dlp
 from yt_dlp import YoutubeDL
+
 
 
 def is_valid_youtube_url(url: str) -> bool:
@@ -42,6 +42,7 @@ def pull_yt_data(url: str, savedir: str, my_proxies: dict = {}) -> tuple:
                 entry["video_url"] = url
                 entry["video_id"] = video_id
                 entry["video_title"] = video_title
+                video_title = re.sub(r'[^a-zA-Z0-9]', '', video_title)
 
                 if video_title is None:
                     savepath = savedir + "/" + video_id + ".jpg"
@@ -49,7 +50,7 @@ def pull_yt_data(url: str, savedir: str, my_proxies: dict = {}) -> tuple:
                     savepath = savedir + "/" + video_title + ".jpg"
 
                 if video_id:
-                    thumbnail_url = get_youtube_thumbnail_url(video_id)["sddefault"]
+                    thumbnail_url = get_youtube_thumbnail_url(video_id)["hqdefault"]
                     download_thumbnail(thumbnail_url, savepath)
 
             print("...done!")
@@ -63,12 +64,13 @@ def pull_yt_data(url: str, savedir: str, my_proxies: dict = {}) -> tuple:
 def get_batch_thumbnails(yt_urls: list, savedir: str, my_proxies: dict = {}):
     thumbnail_savepaths = []
     entries = []
-
+    print(yt_urls)
     for url in yt_urls:
         try:
             thumbnail_savepath, data_entry = pull_yt_data(url, savedir, my_proxies)
             thumbnail_savepaths.append(thumbnail_savepath)
             entries.append(data_entry)
-        except:
+        except Exception as e:
+            print(f"url {url} failed with exception {e}")
             pass
     return thumbnail_savepaths, entries
