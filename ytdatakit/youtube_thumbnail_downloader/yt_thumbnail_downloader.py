@@ -30,7 +30,7 @@ def get_youtube_thumbnail_url(video_id: str) -> dict:
         }
 
 
-def pull_yt_data(url: str, savedir: str, my_proxies: dict = {}) -> str:
+def pull_yt_data(url: str, savedir: str, my_proxies: dict = {}) -> tuple:
     try:
         if is_valid_youtube_url(url):
             with YoutubeDL() as ydl:
@@ -38,6 +38,11 @@ def pull_yt_data(url: str, savedir: str, my_proxies: dict = {}) -> str:
                 video_url = info_dict.get("url", None)
                 video_id = info_dict.get("id", None)
                 video_title = info_dict.get("title", None)
+                entry = {}
+                entry["video_url"] = url
+                entry["video_id"] = video_id
+                entry["video_title"] = video_title
+                
                 if video_title is None:
                     savepath = savedir + "/" + video_id + ".jpg"
                 else:
@@ -48,7 +53,7 @@ def pull_yt_data(url: str, savedir: str, my_proxies: dict = {}) -> str:
                     download_thumbnail(thumbnail_url, savepath)
 
             print("...done!")
-            return savepath
+            return savepath, entry
         else:
             raise ValueError(f"invalid input url: {url}")
     except Exception as e:
@@ -56,10 +61,14 @@ def pull_yt_data(url: str, savedir: str, my_proxies: dict = {}) -> str:
 
 
 def get_yt_thumbnails(yt_urls: list, savedir: str, my_proxies: dict = {}):
-    try:
-        savepaths = []
-        for url in yt_urls:
-            savepath = pull_yt_data(url, savedir, my_proxies)
-            savepaths.append(savepath)
-    except:
-        pass
+    thumbnail_savepaths = []
+    entries = []
+
+    for url in yt_urls:
+        try:
+            thumbnail_savepath, data_entry = pull_yt_data(url, savedir, my_proxies)
+            thumbnail_savepaths.append(thumbnail_savepath)
+            entries.append(data_entry)
+        except:
+            pass
+    return thumbnail_savepaths, entries
