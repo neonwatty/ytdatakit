@@ -22,11 +22,11 @@ def download_thumbnail(yt_thumbnail_url: str, savepath: str) -> None:
 def get_youtube_thumbnail_url(video_id: str) -> dict:
     if video_id:
         return {
-            'default': f'https://img.youtube.com/vi/{video_id}/default.jpg',
-            'mqdefault': f'https://img.youtube.com/vi/{video_id}/mqdefault.jpg',
-            'hqdefault': f'https://img.youtube.com/vi/{video_id}/hqdefault.jpg',
-            'sddefault': f'https://img.youtube.com/vi/{video_id}/sddefault.jpg',
-            'maxresdefault': f'https://img.youtube.com/vi/{video_id}/maxresdefault.jpg'
+            "default": f"https://img.youtube.com/vi/{video_id}/default.jpg",
+            "mqdefault": f"https://img.youtube.com/vi/{video_id}/mqdefault.jpg",
+            "hqdefault": f"https://img.youtube.com/vi/{video_id}/hqdefault.jpg",
+            "sddefault": f"https://img.youtube.com/vi/{video_id}/sddefault.jpg",
+            "maxresdefault": f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg",
         }
 
 
@@ -42,12 +42,12 @@ def pull_yt_data(url: str, savedir: str, my_proxies: dict = {}) -> tuple:
                 entry["video_url"] = url
                 entry["video_id"] = video_id
                 entry["video_title"] = video_title
-                
+
                 if video_title is None:
                     savepath = savedir + "/" + video_id + ".jpg"
                 else:
                     savepath = savedir + "/" + video_title + ".jpg"
-                    
+
                 if video_id:
                     thumbnail_url = get_youtube_thumbnail_url(video_id)["sddefault"]
                     download_thumbnail(thumbnail_url, savepath)
@@ -60,7 +60,7 @@ def pull_yt_data(url: str, savedir: str, my_proxies: dict = {}) -> tuple:
         raise ValueError(f"yt_download failed with exception {e}")
 
 
-def get_yt_thumbnails(yt_urls: list, savedir: str, my_proxies: dict = {}):
+def get_batch_thumbnails(yt_urls: list, savedir: str, my_proxies: dict = {}):
     thumbnail_savepaths = []
     entries = []
 

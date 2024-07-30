@@ -5,8 +5,9 @@ from ytdatakit.youtube_thumbnail_downloader.callbacks import fetch_thumbnails
 
 def app():
     state_init()
-    
-    st.markdown("""
+
+    st.markdown(
+        """
     <style>
     .element-container:has(style){
         display: none;
@@ -32,23 +33,26 @@ def app():
         border-color: blue;
         }
     </style>
-    """, unsafe_allow_html=True)
-    
+    """,
+        unsafe_allow_html=True,
+    )
+
     base = st.container(border=True)
     with base:
         text_urls = st.text_area(
             "youtube urls separated by commas",
             value=st.session_state.thumbnail_raw_urls,
             placeholder="https://www.youtube.com/shorts/o7a9hx-Pqyo, https://www.youtube.com/shorts/xkAYLnIsfX4, ....",
+            key="thumbnail_urls_input"
         )
         uploaded_file = st.file_uploader("Choose a File", type=["txt"])
         thumbnail_col_1, thumbnail_col_2, thumbnail_col_3 = st.columns([3, 4, 6])
         with thumbnail_col_1:
             st.markdown('<span id="button-fetch"></span>', unsafe_allow_html=True)
             fetch_btn = st.button(
-                label="fetch transcripts",
+                label="fetch thumbnails",
                 type="primary",
-                )
+            )
             if fetch_btn:
                 thumbnail_savepaths, thumbnail_data_entries = fetch_thumbnails(uploaded_file, text_urls)
                 st.session_state.thumbnail_savepaths = thumbnail_savepaths
@@ -66,16 +70,9 @@ def app():
         with st.container(border=True):
             for ind, thumbnail_savepath in enumerate(st.session_state.thumbnail_savepaths):
                 title = st.session_state.thumbnail_data_entries[ind]["title"]
-                thumbnail_savepath = st.session_state.thumbnail_savepaths[ind] 
+                thumbnail_savepath = st.session_state.thumbnail_savepaths[ind]
                 with st.container(border=True):
                     a, b, c = st.columns([1, 3, 1])
                     with b:
                         st.subheader(title)
                         st.image(thumbnail_savepath)
-    
-    
-    
-    
-    
-
-

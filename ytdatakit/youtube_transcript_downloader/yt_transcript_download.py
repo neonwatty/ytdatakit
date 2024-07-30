@@ -1,7 +1,6 @@
 import re
 from typing import List, Dict
 from youtube_transcript_api import YouTubeTranscriptApi
-import streamlit as st
 
 
 def is_valid_youtube_url(url: str) -> bool:
@@ -45,7 +44,7 @@ def get_batch_transcripts(youtube_urls: List[str]) -> List[Dict]:
         for i, youtube_url in enumerate(youtube_urls):
             entry = get_single_transcript(youtube_url)
             if entry is not None:
-                entries.append(entry)      
+                entries.append(entry)
         return entries
     except Exception as e:
         print(f"FAILURE: get_batch_transcripts function failed with exception {e}")

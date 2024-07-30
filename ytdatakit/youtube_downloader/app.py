@@ -1,4 +1,4 @@
-from ytdatakit.youtube_downloader.config import app_name, video_choices
+from ytdatakit.youtube_downloader.config import video_choices
 from ytdatakit.youtube_downloader.callbacks import callback_download_video
 from ytdatakit.youtube_downloader.state import state_init
 import streamlit as st
@@ -6,8 +6,9 @@ import streamlit as st
 
 def app():
     state_init()
-    
-    st.markdown("""
+
+    st.markdown(
+        """
     <style>
     .element-container:has(style){
         display: none;
@@ -33,16 +34,21 @@ def app():
         border-color: blue;
         }
     </style>
-    """, unsafe_allow_html=True)
-    
-    st.markdown("""
+    """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
     <style>
     .custom-font {
         font-size:7.5px !important;
         color: transparent;
     }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     video_download_col_a, video_download_col_b, video_download_col_c = st.columns([4, 3, 2])
     with video_download_col_a:
@@ -56,7 +62,15 @@ def app():
     with video_download_col_c:
         st.markdown('<p class="custom-font">fetch</p>', unsafe_allow_html=True)
         st.markdown('<span id="button-fetch"></span>', unsafe_allow_html=True)
-        st.button("fetch video", type="primary", on_click=callback_download_video, args=(url_input, resolution_dropdown, ))
+        st.button(
+            "fetch video",
+            type="primary",
+            on_click=callback_download_video,
+            args=(
+                url_input,
+                resolution_dropdown,
+            ),
+        )
     with st.container(border=True):
         with open(st.session_state.youtube_download_location, "rb") as file:
             st.markdown('<span id="button-download"></span>', unsafe_allow_html=True)

@@ -36,18 +36,18 @@ def fetch_transcripts(uploaded_file, text_urls):
                 except:  # noqa E722
                     st.warning("please check your manually entered urls", icon="⚠️")
                     st.stop()
-        
+
         batch_transcripts = get_batch_transcripts(youtube_urls)
         df = pd.DataFrame(batch_transcripts)
         df_download = convert_df(df)
-        
+
         def truncate_and_append(text, length, suffix):
             if len(text) > length:
                 return text[:length] + suffix
             return text
-        max_length = 100
-        suffix = '...'
-        df_table = copy.deepcopy(df).astype(str)
-        df_table['transcript'] = df_table['transcript'].apply(lambda x: truncate_and_append(x, max_length, suffix))
-        return df_table, df_download
 
+        max_length = 100
+        suffix = "..."
+        df_table = copy.deepcopy(df).astype(str)
+        df_table["transcript"] = df_table["transcript"].apply(lambda x: truncate_and_append(x, max_length, suffix))
+        return df_table, df_download

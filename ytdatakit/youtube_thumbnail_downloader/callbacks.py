@@ -1,8 +1,7 @@
 from ytdatakit.youtube_thumbnail_downloader.yt_thumbnail_downloader import get_batch_thumbnails
 from ytdatakit.youtube_thumbnail_downloader.zip import zip_images
-from io import StringIO
-import pandas as pd
 import streamlit as st
+from io import StringIO
 
 
 def fetch_thumbnails(uploaded_file, text_urls):
@@ -30,8 +29,7 @@ def fetch_thumbnails(uploaded_file, text_urls):
                 except:  # noqa E722
                     st.warning("please check your manually entered urls", icon="⚠️")
                     st.stop()
-        
-        thumbnail_savepaths, data_entries = get_batch_thumbnails(youtube_urls)
+
+        thumbnail_savepaths, data_entries = get_batch_thumbnails(youtube_urls, st.session_data.thumbnail_savepath)
         zip_images(thumbnail_savepaths, st.session_data.thumbnails_zip_path)
         return thumbnail_savepaths, data_entries
-
