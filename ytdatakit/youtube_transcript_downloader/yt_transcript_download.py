@@ -1,6 +1,7 @@
 import re
 from typing import List, Dict
 from youtube_transcript_api import YouTubeTranscriptApi
+import streamlit as st
 
 
 def is_valid_youtube_url(url: str) -> bool:
@@ -13,49 +14,39 @@ def is_valid_youtube_url(url: str) -> bool:
 
 
 def get_single_transcript(youtube_url: str) -> dict:
-    try:
-        if is_valid_youtube_url(youtube_url):
-            if "shorts" in youtube_url:
-                video_id = youtube_url.split("/")[-1]
-            else:
-                video_id = youtube_url.split("=")[-1]
+    if is_valid_youtube_url(youtube_url):
+        if "shorts" in youtube_url:
+            video_id = youtube_url.split("/")[-1]
+        else:
+            video_id = youtube_url.split("=")[-1]
+        try:
             video_transcript = YouTubeTranscriptApi.get_transcript(video_id)
             entry = {}
             entry["youtube_url"] = youtube_url
             entry["video_id"] = video_id
             entry["transcript"] = video_transcript
             return entry
-        else:
-            print(f"FAILURE: youtube_url is not valid - {youtube_url}")
-            return {}
-    except Exception as e:
-        print(f"FAILURE: transcript pull for youtube_url - {youtube_url} - failed with exception {e}")
-        return {}
+        except Exception as e:
+            if "Subtitles are disabled for this video" in str(e):
+                entry = {}
+                entry["youtube_url"] = youtube_url
+                entry["video_id"] = video_id
+                entry["transcript"] = "Subtitles are disabled for this video"
+                return entry
+            else:
+                print(e)
+    else:
+        print(f"FAILURE: youtube_url is not valid - {youtube_url}")
 
 
 def get_batch_transcripts(youtube_urls: List[str]) -> List[Dict]:
-    valid_urls = []
-    valid_vids = []
-    for i, youtube_url in enumerate(youtube_urls):
-        if is_valid_youtube_url(youtube_url):
-            if "shorts" in youtube_url:
-                video_id = youtube_url.split("/")[-1]
-            else:
-                video_id = youtube_url.split("=")[-1]
-            valid_urls.append(youtube_url)
-            valid_vids.append(video_id)
     try:
-        video_transcripts = YouTubeTranscriptApi.get_transcripts(valid_vids, languages=["en"])[0]
-        print(YouTubeTranscriptApi.get_transcripts(valid_vids, languages=["en"]))
-
         entries = []
-        for i in range(len(valid_urls)):
-            entry = {}
-            entry["youtube_url"] = valid_urls[i]
-            entry["video_id"] = valid_vids[i]
-            entry["transcript"] = video_transcripts[valid_vids[i]]
-            entries.append(entry)
+        for i, youtube_url in enumerate(youtube_urls):
+            entry = get_single_transcript(youtube_url)
+            if entry is not None:
+                entries.append(entry)      
         return entries
     except Exception as e:
-        print(f"FAILURE: batch transcription fetch failed with exception {e}")
+        print(f"FAILURE: get_batch_transcripts function failed with exception {e}")
         return []
