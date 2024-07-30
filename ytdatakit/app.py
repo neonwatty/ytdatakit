@@ -1,5 +1,5 @@
 import streamlit as st
-from youtube_downloader.app import video_downloader
+from ytdatakit.youtube_downloader.app import app as video_downloader
 
 
 app_name = "ytdatakit"
