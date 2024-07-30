@@ -3,7 +3,6 @@ import requests
 from yt_dlp import YoutubeDL
 
 
-
 def is_valid_youtube_url(url: str) -> bool:
     if not isinstance(url, str):
         return False

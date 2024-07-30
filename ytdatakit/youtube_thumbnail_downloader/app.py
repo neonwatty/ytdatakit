@@ -48,12 +48,12 @@ def app():
         thumbnail_col_1, thumbnail_col_2, thumbnail_col_3 = st.columns([5, 4, 6])
         with thumbnail_col_1:
             st.markdown('<span id="button-fetch"></span>', unsafe_allow_html=True)
-            fetch_btn = st.button(
+            st.button(
                 label="fetch thumbnails",
                 type="primary",
+                on_click=fetch_thumbnails,
+                args=(uploaded_file, text_urls)
             )
-            if fetch_btn:
-                fetch_thumbnails(uploaded_file, text_urls)
 
         # with thumbnail_col_2:
         #     st.markdown('<span id="button-download"></span>', unsafe_allow_html=True)
