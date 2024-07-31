@@ -11,8 +11,8 @@ st.title(app_name)
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["Video downloader", "Transcript downloader", "Thumbnail downloader", "💡 About", "Settings"])
 
 with tab1:
-    thumbnail_downloader()
-with tab2:
     video_downloader()
-with tab3:
+with tab2:
     transcript_downloader()
+with tab3:
+    thumbnail_downloader()
