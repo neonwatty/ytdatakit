@@ -1,4 +1,5 @@
 yt-dlp
+scrapetube
 youtube-transcript-api
 pandas
 streamlit
