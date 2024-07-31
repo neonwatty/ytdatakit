@@ -1,8 +1,6 @@
 services:
   ytdatakit:
-    build:
-      context: .
-    image: ytdatakit
+    image: ghcr.io/neonwatty/ytdatakit:latest
     container_name: ytdatakit
     ports:
       - 8502:8502
