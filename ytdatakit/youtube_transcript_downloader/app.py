@@ -42,7 +42,7 @@ def app():
             "youtube urls separated by commas",
             value=st.session_state.transcript_raw_urls,
             placeholder="https://www.youtube.com/shorts/o7a9hx-Pqyo, https://www.youtube.com/shorts/xkAYLnIsfX4, ....",
-            key="transcript_urls_input"
+            key="transcript_urls_input",
         )
         uploaded_file = st.file_uploader("Choose a File", type=["txt"], key="transcripts_file_uploader")
         transcript_col_1, transcript_col_2, transcript_col_3 = st.columns([3, 4, 6])

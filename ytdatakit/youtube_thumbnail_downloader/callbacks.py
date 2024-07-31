@@ -10,8 +10,8 @@ import tempfile
 def default_temp_savdir():
     with tempfile.TemporaryDirectory() as tmpdirname:
         return tmpdirname
-    
-    
+
+
 def urls_normalizer(uploaded_file: "st.uploaded", text_urls: str) -> list:
     youtube_urls = []
     if uploaded_file is not None:
@@ -42,24 +42,20 @@ def urls_normalizer(uploaded_file: "st.uploaded", text_urls: str) -> list:
 def fetch_logic(youtube_urls: list) -> None:
     if youtube_urls != st.session_state.thumbnail_raw_urls:
         st.session_state.thumbnail_raw_urls = youtube_urls
-        st.session_state.fetch_count = 0
         reset_state()
     if st.session_state.fetch_count == 0:
         st.session_state.local_thumbnail_location = default_thumbnail_location()
-        savedir = "/".join(st.session_state.local_thumbnail_location.split("/")[:-2]) 
+        savedir = "/".join(st.session_state.local_thumbnail_location.split("/")[:-2])
         thumbnail_savepaths, thumbnail_data_entries = get_batch_thumbnails(youtube_urls, savedir)
         st.session_state.thumbnail_savepaths = thumbnail_savepaths
         st.session_state.thumbnail_data_entries = thumbnail_data_entries
         st.session_state.fetch_count += 1
-        
-        # zip_images(thumbnail_savepaths)
+
+        st.session_state.thumbnails_zip_path = savedir + "/" + "thumbnails.zip"
+        zip_images(thumbnail_savepaths)
 
 
 def fetch_thumbnails(uploaded_file, text_urls):
     with st.spinner(text="thumbnail pull in progress..."):
         youtube_urls = urls_normalizer(uploaded_file, text_urls)
         fetch_logic(youtube_urls)
-        
-                
-
-

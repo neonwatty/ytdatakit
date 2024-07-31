@@ -29,9 +29,8 @@ def get_youtube_thumbnail_url(video_id: str) -> dict:
         }
 
 
-def pull_yt_data(url: str, savedir: str,  my_proxies: dict = {}) -> tuple:
+def pull_yt_data(url: str, savedir: str, my_proxies: dict = {}) -> tuple:
     try:
-
         if is_valid_youtube_url(url):
             with YoutubeDL() as ydl:
                 info_dict = ydl.extract_info(url, download=False)
@@ -42,7 +41,7 @@ def pull_yt_data(url: str, savedir: str,  my_proxies: dict = {}) -> tuple:
                 entry["video_url"] = url
                 entry["video_id"] = video_id
                 entry["video_title"] = video_title
-                video_title = re.sub(r'[^a-zA-Z0-9]', '', video_title)
+                video_title = re.sub(r"[^a-zA-Z0-9]", "", video_title)
 
                 if video_title is None:
                     savepath = savedir + "/" + video_id + ".jpg"
@@ -52,7 +51,6 @@ def pull_yt_data(url: str, savedir: str,  my_proxies: dict = {}) -> tuple:
                 if video_id:
                     thumbnail_url = get_youtube_thumbnail_url(video_id)["hqdefault"]
                     download_thumbnail(thumbnail_url, savepath)
-                    print("INFO: END")
             print("...done!")
             return savepath, entry
         else:
