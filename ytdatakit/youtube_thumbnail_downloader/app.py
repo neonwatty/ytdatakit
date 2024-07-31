@@ -40,10 +40,11 @@ def app():
     with base:
         text_urls = st.text_area(
             "youtube urls separated by commas",
-            value=st.session_state.thumbnail_raw_urls,
+            value=st.session_state.thumbnail_text_input_urls,
             placeholder="https://www.youtube.com/shorts/o7a9hx-Pqyo, https://www.youtube.com/shorts/xkAYLnIsfX4, ....",
             key="thumbnail_urls_input"
         )
+        st.thumbnail_text_input_urls = text_urls
         uploaded_file = st.file_uploader("Choose a File", type=["txt"], key="thumbanils_file_uploader")
         thumbnail_col_1, thumbnail_col_2, thumbnail_col_3 = st.columns([5, 4, 6])
         with thumbnail_col_1:

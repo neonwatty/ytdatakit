@@ -46,10 +46,12 @@ def fetch_logic(youtube_urls: list) -> None:
         reset_state()
     if st.session_state.fetch_count == 0:
         st.session_state.local_thumbnail_location = default_thumbnail_location()
-        thumbnail_savepaths, thumbnail_data_entries = get_batch_thumbnails(youtube_urls, st.session_state.local_thumbnail_location)
+        savedir = "/".join(st.session_state.local_thumbnail_location.split("/")[:-2]) 
+        thumbnail_savepaths, thumbnail_data_entries = get_batch_thumbnails(youtube_urls, savedir)
         st.session_state.thumbnail_savepaths = thumbnail_savepaths
         st.session_state.thumbnail_data_entries = thumbnail_data_entries
         st.session_state.fetch_count += 1
+        
         # zip_images(thumbnail_savepaths)
 
 
