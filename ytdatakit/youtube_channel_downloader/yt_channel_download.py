@@ -38,14 +38,18 @@ def get_videourl_from_channel_id(channel_id: str) -> Tuple[list, list] | Tuple[N
 
 def get_channel_videos(channel_name: str) -> Tuple[list, list] | Tuple[None, None]:
     try:
+        print("INFO: starting channel video id puller...")
         channel_id = get_channel_id_from_name(channel_name)
         if channel_id is not None:
             video_ids, video_urls = get_videourl_from_channel_id(channel_id)
             if video_ids is not None and video_urls is not None:
+                print("...done!")
                 return video_ids, video_urls
             else:
+                print("...done!")
                 return None, None
         else:
+            print("...done!")
             return None, None
     except Exception as e:
         print(f"FAILURE: get_channel_videos failed with exception {e}")

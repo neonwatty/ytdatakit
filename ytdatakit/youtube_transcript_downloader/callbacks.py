@@ -12,30 +12,30 @@ def convert_df(df: pd.DataFrame) -> "csv":
 
 
 def fetch_transcripts(uploaded_file, text_urls):
-    with st.spinner(text="transcript pull in progress..."):
-        youtube_urls = []
-        if uploaded_file is not None:
-            if text_urls is not None:
-                if len(text_urls.strip()) > 0:
-                    st.warning("you can enter urls manually or from file but not both", icon="⚠️")
-                    st.stop()
-
-            if uploaded_file.type == "text/plain":
-                stringio = StringIO(uploaded_file.read().decode("utf-8"))
-                for line in stringio:
-                    youtube_urls.append(line.strip())
+    # with st.spinner(text="transcript pull in progress..."):
+    youtube_urls = []
+    if uploaded_file is not None:
         if text_urls is not None:
             if len(text_urls.strip()) > 0:
-                if uploaded_file is not None:
-                    st.warning("you can enter urls manually or from file but not both", icon="⚠️")
-                    st.stop()
-                try:
-                    text_urls_split = text_urls.split(",")
-                    text_urls_split = [v.strip() for v in text_urls_split]
-                    youtube_urls = text_urls_split
-                except:  # noqa E722
-                    st.warning("please check your manually entered urls", icon="⚠️")
-                    st.stop()
+                st.warning("you can enter urls manually or from file but not both", icon="⚠️")
+                st.stop()
+
+        if uploaded_file.type == "text/plain":
+            stringio = StringIO(uploaded_file.read().decode("utf-8"))
+            for line in stringio:
+                youtube_urls.append(line.strip())
+    if text_urls is not None:
+        if len(text_urls.strip()) > 0:
+            if uploaded_file is not None:
+                st.warning("you can enter urls manually or from file but not both", icon="⚠️")
+                st.stop()
+            try:
+                text_urls_split = text_urls.split(",")
+                text_urls_split = [v.strip() for v in text_urls_split]
+                youtube_urls = text_urls_split
+            except:  # noqa E722
+                st.warning("please check your manually entered urls", icon="⚠️")
+                st.stop()
 
         batch_transcripts = get_batch_transcripts(youtube_urls)
         df = pd.DataFrame(batch_transcripts)

@@ -1,5 +1,5 @@
 import streamlit as st
-from youtube_downloader.yt_download import download_video
+from ytdatakit.youtube_downloader.yt_download import download_video
 from ytdatakit.youtube_downloader.state import default_youtube_download_location
 from ytdatakit.youtube_downloader.config import video_choices
 

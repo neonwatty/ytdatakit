@@ -56,6 +56,6 @@ def fetch_logic(youtube_urls: list) -> None:
 
 
 def fetch_thumbnails(uploaded_file, text_urls):
-    with st.spinner(text="thumbnail pull in progress..."):
-        youtube_urls = urls_normalizer(uploaded_file, text_urls)
-        fetch_logic(youtube_urls)
+    # with st.spinner(text="thumbnail pull in progress..."):
+    youtube_urls = urls_normalizer(uploaded_file, text_urls)
+    fetch_logic(youtube_urls)
