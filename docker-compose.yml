@@ -1,8 +1,8 @@
 services:
-  youtube_downloader:
+  ytdatakit:
     build:
       context: .
-    image: youtube_downloader
-    container_name: youtube_downloader
+    image: ytdatakit
+    container_name: ytdatakit
     ports:
-      - 7860:7860
+      - 8502:8502
