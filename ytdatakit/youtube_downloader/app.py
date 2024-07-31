@@ -55,7 +55,7 @@ def app():
             value="https://www.youtube.com/watch?v=qQgyoHsknIk",
             label="🔗 Paste YouTube / Shorts URL here",
             placeholder="e.g., https://www.youtube.com/watch?v=.",
-            key="youtube_download_text_input"
+            key="youtube_download_text_input",
         )
     with video_download_col_b:
         resolution_dropdown = st.selectbox(options=video_choices, index=st.session_state.youtube_download_resolution_index, label="video resolution")
@@ -70,7 +70,7 @@ def app():
                 url_input,
                 resolution_dropdown,
             ),
-            key="youtube_download_fetch_button"
+            key="youtube_download_fetch_button",
         )
     with st.container(border=True):
         with open(st.session_state.youtube_download_location, "rb") as file:

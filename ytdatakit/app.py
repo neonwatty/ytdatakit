@@ -8,7 +8,9 @@ app_name = "ytdatakit"
 st.set_page_config(page_title=app_name)
 st.title(app_name)
 
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Video downloader", "Transcript downloader", "Thumbnail downloader", "Channel downloader", "💡 About", "Settings"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
+    ["Video downloader", "Transcript downloader", "Thumbnail downloader", "Channel downloader", "💡 About", "Settings"]
+)
 
 with tab1:
     video_downloader()

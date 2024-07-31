@@ -70,7 +70,7 @@ def app():
                 st.session_state.channel_data_table = df_table
                 st.session_state.channel_data_download = df_download
                 st.session_state.channel_fetch_count += 1
-                
+
     with video_channel_col_c:
         st.markdown('<p class="custom-font">fetch</p>', unsafe_allow_html=True)
         st.markdown('<span id="button-download"></span>', unsafe_allow_html=True)

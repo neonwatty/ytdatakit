@@ -5,15 +5,15 @@ from typing import Tuple
 
 def get_channel_id_from_name(channel_name: str) -> str | None:
     ydl_opts = {
-        'quiet': True,
-        'skip_download': True,
-        'extract_flat': True,
-        'force_generic_extractor': True,
+        "quiet": True,
+        "skip_download": True,
+        "extract_flat": True,
+        "force_generic_extractor": True,
     }
-    
+
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         try:
-            info = ydl.extract_info(f'ytsearch1:{channel_name}', download=False)
+            info = ydl.extract_info(f"ytsearch1:{channel_name}", download=False)
             return info["entries"][0]["channel_id"]
         except Exception as e:
             print(f"FAILURE: get_channel_id_from_name failed with exception {e}")
@@ -26,7 +26,7 @@ def get_videourl_from_channel_id(channel_id: str) -> Tuple[list, list] | Tuple[N
         video_urls = []
         video_ids = []
         for video in videos:
-            vid = video['videoId']
+            vid = video["videoId"]
             vurl = "https://www.youtube.com/watch?v=" + vid
             video_ids.append(vid)
             video_urls.append(vurl)

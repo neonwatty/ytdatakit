@@ -12,7 +12,7 @@ A simple app that lets you conveniently download youtube videos, transcripts, th
 To run the app install the associated `requirements.txt` and run
 
 ```python
-python youtube_downloader/app.py
+python streamlit run ytdatakit/app.py
 ```
 
 Or run via Docker

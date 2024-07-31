@@ -6,7 +6,7 @@ from tests import APP_FILE
 
 @pytest.fixture(scope="module")
 def start_app():
-    cmd = f"python {APP_FILE}"
+    cmd = f"python -m streamlit run {APP_FILE} --server.headless true"
     process = subprocess.Popen(
         cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )

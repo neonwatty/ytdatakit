@@ -22,4 +22,3 @@ def state_reset():
     if "channel_data_download" not in st.session_state:
         st.session_state.channel_data_download = df.to_csv().encode("utf-8")
     st.session_state.channel_fetch_count = 0
-

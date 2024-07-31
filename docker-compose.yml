@@ -6,3 +6,5 @@ services:
     container_name: ytdatakit
     ports:
       - 8502:8502
+    volumes:
+      - ./data:/home/data

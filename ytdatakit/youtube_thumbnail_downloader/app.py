@@ -57,12 +57,12 @@ def app():
                 with open(st.session_state.thumbnails_zip_path, "rb") as file:
                     st.download_button(
                         label="download thumbnails",
-                        data=file, #st.session_state.thumbnails_zip_path if "thumbnails_zip_path" in st.session_state else "./data/input/blank.zip",
+                        data=file,  # st.session_state.thumbnails_zip_path if "thumbnails_zip_path" in st.session_state else "./data/input/blank.zip",
                         file_name="thumbnails.zip",
                         mime="application/zip",
                         type="primary",
-                        disabled=True if st.session_state.thumbnail_fetch_count == 0 else False
-                        )
+                        disabled=True if st.session_state.thumbnail_fetch_count == 0 else False,
+                    )
             else:
                 st.download_button(
                     label="download thumbnails",
@@ -70,8 +70,8 @@ def app():
                     file_name="thumbnails.zip",
                     mime="application/zip",
                     type="primary",
-                    disabled=True
-                    )
+                    disabled=True,
+                )
 
         with st.container(border=True):
             for ind, thumbnail_savepath in enumerate(st.session_state.thumbnail_savepaths):
