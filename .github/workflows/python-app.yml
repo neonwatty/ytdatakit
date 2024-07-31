@@ -4,6 +4,12 @@
 name: Python application
 
 on:
+  push:
+    branches: [ "main" ]
+    paths-ignore:
+        - '**/README.md'
+        - '**/CONTRIBUTING.md'
+        - '**LICENSE'
   pull_request:
     branches: [ "main" ]
     paths-ignore:
