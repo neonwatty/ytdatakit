@@ -61,7 +61,7 @@ def app():
                         file_name="thumbnails.zip",
                         mime="application/zip",
                         type="primary",
-                        disabled=True if st.session_state.fetch_count == 0 else False
+                        disabled=True if st.session_state.thumbnail_fetch_count == 0 else False
                         )
             else:
                 st.download_button(

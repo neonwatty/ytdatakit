@@ -52,7 +52,7 @@ def app():
     video_download_col_a, video_download_col_b, video_download_col_c = st.columns([4, 3, 2])
     with video_download_col_a:
         url_input = st.text_input(
-            value="https://www.youtube.com/shorts/43BhDHYBG0o",
+            value="https://www.youtube.com/watch?v=qQgyoHsknIk",
             label="🔗 Paste YouTube / Shorts URL here",
             placeholder="e.g., https://www.youtube.com/watch?v=.",
             key="youtube_download_text_input"

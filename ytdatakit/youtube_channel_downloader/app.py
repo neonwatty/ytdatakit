@@ -65,11 +65,11 @@ def app():
         if fetch_btn:
             if channel_name != st.session_state.channel_name:
                 state_reset()
-            if st.session_state.fetch_count == 0:
+            if st.session_state.channel_fetch_count == 0:
                 df_table, df_download = fetch_channel_videos(channel_name)
                 st.session_state.channel_data_table = df_table
                 st.session_state.channel_data_download = df_download
-                st.session_state.fetch_count += 1
+                st.session_state.channel_fetch_count += 1
                 
     with video_channel_col_c:
         st.markdown('<p class="custom-font">fetch</p>', unsafe_allow_html=True)
@@ -79,7 +79,7 @@ def app():
             data=st.session_state.channel_data_download,
             file_name="channel_data.csv",
             mime="text/csv",
-            disabled=False if st.session_state.fetch_count > 0 else True,
+            disabled=False if st.session_state.channel_fetch_count > 0 else True,
             type="primary",
         )
     with st.container(border=True):

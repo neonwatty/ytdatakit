@@ -16,8 +16,8 @@ def state_init():
         st.session_state.thumbnail_savepaths = default_thumbnail_savepaths
     if "thumbnail_data_entries" not in st.session_state:
         st.session_state.thumbnail_data_entries = default_thumbnail_data_entries
-    if "fetch_count" not in st.session_state:
-        st.session_state.fetch_count = 0
+    if "thumbnail_fetch_count" not in st.session_state:
+        st.session_state.thumbnail_fetch_count = 0
     if "default_thumbnail_location" not in st.session_state:
         st.session_state.local_thumbnail_location = default_thumbnail_location()
     if "youtube_thumbnails_expander" not in st.session_state:
@@ -30,5 +30,5 @@ def reset_state():
     st.session_state.thumbnails_zip_path = default_thumbnails_zip_path
     st.session_state.thumbnail_text_input_urls = ""
 
-    st.session_state.fetch_count = 0
+    st.session_state.thumbnail_fetch_count = 0
     st.session_state.youtube_thumbnails_expander = False
