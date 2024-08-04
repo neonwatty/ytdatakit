@@ -8,6 +8,8 @@ from ytdatakit.youtube_channel_downloader.app import app as channel_downloader
 app_name = "ytdatakit"
 st.set_page_config(page_title=app_name)
 st.title(app_name)
+st.markdown("###### Run this app locally by pulling [the official repo](https://github.com/neonwatty/ytdatakit)")
+
 
 tab1, tab2, tab3, tab4, tab5 = st.tabs(
     ["💡 About", "🎞️ Video downloader", "📜 Transcript downloader", "📌 Thumbnail downloader", "📕 Channel downloader"]

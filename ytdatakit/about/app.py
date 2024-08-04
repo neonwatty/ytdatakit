@@ -13,5 +13,6 @@ def app():
         "**Tab 5:**  📕 Channel downloader - download all YouTube video ids associated with a channel name. \n\n"
         ""
         "Each app is illustrated in the gif below. \n \n"
+
         "![Alt Text](https://github.com/neonwatty/readme_gifs/blob/main/ytdatakit.gif?raw=true)"
     )
