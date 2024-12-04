@@ -1,6 +1,6 @@
 [![Python application](https://github.com/neonwatty/ytdatakit/actions/workflows/python-app.yml/badge.svg)](https://github.com/neonwatty/ytdatakit/actions/workflows/python-app.yml/python-app.yml)
 
-# A Python app for downloading YouTube videos, transcripts, thumbnails, and channel data all in one place
+# A free Python app for downloading YouTube videos, transcripts, thumbnails, and channel data all in one place
 
 A simple app that lets you conveniently download youtube videos, transcripts, thumbnails, and channel data. All in one place.  Can be easily run locally using python or docker.
 
